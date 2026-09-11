@@ -34,8 +34,10 @@ Talos::Shape::Underlying Talos::Value::Any::m_shape() const noexcept {
   switch (m_pointer.kind()) { XX_VALUES_LOOKUP(X) default : break; }
 #undef X
 
-  // otherwise can resolve the header shape now
-  return m_as<Object::Any>()->header()->shape();
+  // ensure we return constructed instance shapes as well
+  const auto *header = m_as<Object::Any>()->header();
+  if (!header->is<Object::Instance>()) return header->shape();
+  return m_as<Object::Instance>()->prototype().extends();
 }
 
 $::String::View Talos::Value::Any::m_brand() const noexcept {

@@ -9,6 +9,7 @@ import "talos:assert" as Assert;
 
 // - TEST MOCKS - //
 
+//! A mocked enumeration value.
 enum Mock {
     A("a"),
     B("b") = 10,

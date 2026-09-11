@@ -7,6 +7,28 @@
 import "talos:test" as Test;
 import "talos:assert" as Assert;
 
+// - TEST MOCKS - //
+
+namespace Mock {
+    //! Base Class Tier 1.
+    export class One {};
+
+    //! Derived Class Tier 2.
+    export class Two {};
+
+    //! Derived Class Tier 3.
+    export class Three {};
+
+    //! Final Class Tier 4.
+    export class Four {};
+};
+
 // - TEST CASES - //
 
-Test.todo("Syntax", fn => Todo());
+Test.suite("Syntax", fn {
+    Test.case("Call 'Mock.One'", fn {
+        let instance = Mock.One();
+        Assert.okay(instance is Object);
+        Assert.okay(instance is Mock.One);
+    });
+});

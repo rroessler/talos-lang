@@ -7,9 +7,7 @@
 - [x] Split `Variable::Captures` into the parsing phase instead of the type-checking phase (this will enable typeless compilation whilst keep performance instead of adding additional visitor overhead)
 - [ ] Running `hyperfine "talos test"` sometimes leads to hangs/runtime blocking. This needs some investigation to see why this occurs (most likely something to do with the scheduler in `talos::xsio`)
     - Changed from using `$::Unique::Pointer` to `$::Shared::Pointer` in `XSIO::Virtual::Thread` for tasks. This does help but now the same race condition occurs more infrequently
-- [ ] Replace all released asset installation scripts to _not_ remove the `-stable` suffix from release tags. It would be good to convert this into a script that can target all current releases
-    - Essentially download all the assets, unzip their contents, replace the installation scripts, zip the result and upload with the `--clobber` flag to that release
-    - After which all release tags should be modified to always include the suffix, same as the one that is shown in `talos --version`. This way release tags are clearly marked
+- [ ] Currently there are issues with class inheritance that means we cannot reliably execute `? is ?` clauses. Specifically when we use `Object` as a guard (results in mismatched failures on runtime types)
 
 ## Rewrite Items
 

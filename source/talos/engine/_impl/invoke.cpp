@@ -54,7 +54,7 @@ Talos::Value::Any Talos::Engine::Invoke::inlined(Isolate *isolate, const Machine
 
 Talos::Value::Any Talos::Engine::Invoke::construct(Isolate *isolate, const Object::Class &prototype, const Args &args) {
   // prepare the baseline statics here
-  auto symbol = Operator::Attribute::DISP;
+  auto symbol = Operator::Attribute::CALL;
   const auto &statics = prototype.statics();
 
   // if the constructor is missing, the panic

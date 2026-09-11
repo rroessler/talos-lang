@@ -87,3 +87,4 @@ Todo...
 - Fixed: Previously, there was no logic to handle unescaping `String` literals. Now they are unescaped correctly before interning.
 - Fixed: The numerical ordering of `Number` values did not work when comparing negatives to positives. This has been corrected.
 - Fixed: An issue with the destruction of `Engine::Frame` for non-awaited `Future` values has been resolved by moving `Async::Worker` trace handling.
+- Fixed: Constructor calls now uses the correct internal attribute lookup for invocation. Previously it was using the `dispose` attribute lookup.

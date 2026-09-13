@@ -19,7 +19,7 @@ jobs:
             fail-fast: true
             matrix:
                 include:
-                    - { label: darwin, arch: x64, host: macos-15-intel }
+                    - { label: darwin, arch: x64, host: macos-26-intel }
                     - { label: darwin, arch: arm64, host: macos-latest }
                     - { label: linux, arch: x64, host: ubuntu-latest }
                     - { label: linux, arch: arm64, host: ubuntu-24.04-arm }
@@ -32,6 +32,7 @@ jobs:
             - uses: lukka/get-cmake@latest
 
             - uses: ZhongRuoyu/setup-llvm@v0
+              if: ${{ matrix.host != 'macos-26-intel' }}
               with: { llvm-version: 22 }
 
             - name: Building '${{ matrix.label }}-${{ matrix.arch }}'

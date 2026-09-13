@@ -33,7 +33,7 @@ bool Talos::Type::Prototype::m_unify(const Erased &candidate, Constraints *const
   // attempt finding a suitable super-class instance
   while (other && !other->m_extends(m_shape)) {
     if (other->m_super->is<None>()) other = nullptr;
-    else other = other->m_super->as<Prototype>();
+    else other = New::cast<Prototype>(other->m_super);
   }
 
   // fail when there is no common super-class

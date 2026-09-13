@@ -48,9 +48,6 @@ public:
   /// @brief Gets the truthiness of the value.
   inline constexpr bool truthiness() const noexcept { return m_truthiness(); }
 
-  /// @brief Gets the shape of the value.
-  inline constexpr Shape::Underlying shape() const noexcept { return m_shape(); }
-
   /// @brief Gets the name of the value type.
   inline constexpr $::String::View brand() const noexcept { return m_brand(); }
 
@@ -84,9 +81,6 @@ protected:
 
   /// @brief Gets the truthiness of the value.
   bool m_truthiness() const noexcept;
-
-  /// @brief Gets the underlying shape of the value.
-  Shape::Underlying m_shape() const noexcept;
 
   /// @brief Gets the type-name of the value.
   $::String::View m_brand() const noexcept;

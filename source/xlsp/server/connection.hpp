@@ -7,6 +7,7 @@
 #include "xlsp/event/storage.hpp"
 #include "xlsp/server/options.hpp"
 #include "xlsp/transport/abstract.hpp"
+#include "xtdlib/system/executable.hpp"
 
 namespace XLSP::Server {
 
@@ -79,6 +80,7 @@ public:
     // show some details about the server now
     $_DEBUG("Process ID: {0}", $::System::pid());
     $_DEBUG("Transport: {0}", m_transport->label());
+    $_DEBUG("Executable: {0}", $::Executable::resolve().string());
 
     // start running the listener loop now
     auto error = m_listen();

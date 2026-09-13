@@ -68,7 +68,7 @@ public:
   inline constexpr $::Unit::Ternary truthiness() const noexcept final { return true; }
 
   /// @brief Callables always validate to function instances.
-  inline constexpr Shape::Underlying shape() const noexcept final { return Shape::Lookup<Function::Any>(); }
+  inline constexpr Shape::Underlying shape() const noexcept final { return Shape::Lookup<Function::Closure>(); }
 
   /// @brief Gets the minimum parameters available.
   inline constexpr size_t arity() const noexcept {

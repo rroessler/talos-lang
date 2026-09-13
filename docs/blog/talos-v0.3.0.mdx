@@ -88,3 +88,12 @@ Todo...
 - Fixed: The numerical ordering of `Number` values did not work when comparing negatives to positives. This has been corrected.
 - Fixed: An issue with the destruction of `Engine::Frame` for non-awaited `Future` values has been resolved by moving `Async::Worker` trace handling.
 - Fixed: Constructor calls now uses the correct internal attribute lookup for invocation. Previously it was using the `dispose` attribute lookup.
+- Fixed: There was a major issue with inferrence expressions for classes. The subtype check now properly checks that the guard matches the value instead of the other way around.
+- Added: Included the builtin typeclass for `Object` values. This was previously omitted but will be necessary in future versions for `Object` reflection methods.
+- Moved: The internal `Globals::Service` is now instantiated immediately. This was done to ensure these types/values are always available on startup before loggable services.
+- Moved: The `.shape()` method for the internal `Value::Any` wrapper has been moved to the base `Pointer::Tagged` value. This simplifies abstractions using these shapes as they are expected to always be builtin shapes only.
+
+<h4>Toolkit / talos serve</h4>
+
+- Fixed: The LSP now shows the full revision version for Talos. This is helpful in development to ensure not using a stale executable.
+- Added: The LSP now shows the executable path in debug outputs. This is helpful in development to ensure not using a stale executable.

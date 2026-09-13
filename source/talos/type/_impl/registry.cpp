@@ -12,7 +12,7 @@ static Talos::Type::Erased g_fail = $::Shared::New<Talos::Type::Poison>();
 static Talos::Type::Erased g_unset = $::Shared::New<Talos::Type::Unset>();
 static Talos::Type::Erased g_never = $::Shared::New<Talos::Type::Union>();
 
-static auto g_object = $::Shared::New<Talos::Type::Structure>();
+static auto g_object = $::Shared::New<Talos::Type::Structure>(g_any);
 static auto g_exception = Talos::Builtins::Inspect<Talos::Object::Exception>::typeclass()->instantiate();
 
 static Talos::Type::Erased g_number = Talos::Builtins::Inspect<Talos::Number::Tagged>::typeclass()->instantiate();

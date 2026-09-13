@@ -3,6 +3,7 @@
 
 /// Talos Includes
 #include "talos/forward/number.hpp"
+#include "talos/forward/shape.hpp"
 #include "talos/value/feedback.hpp"
 
 /**
@@ -120,6 +121,9 @@ public:
   /// @brief Gets the underlying tagged value.
   inline constexpr Underlying value() const noexcept { return m_value; }
 
+  /// @brief Gets the underlying shape value (builtin only).
+  inline constexpr Shape::Underlying shape() const noexcept { return m_shape(); }
+
   /// @brief Denotes if a pointer is an "okay" value.
   inline constexpr bool okay() const noexcept { return (m_value & Mask::ERRC) != Mask::ERRC; }
 
@@ -157,6 +161,9 @@ public:
 
 protected:
   //  PRIVATE METHODS  //
+
+  /// @brief Gets a values underlying shape (not class-shape).
+  Shape::Underlying m_shape() const noexcept;
 
   /**
    * @brief Handles printing pointers.

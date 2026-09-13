@@ -11,7 +11,7 @@
 namespace Talos::Globals {
 
 /// @brief Builtin Global Values.
-class Service : public XI::Singleton {
+class Service : public XI::Singleton, public XI::Immediate {
   //  PROPERTIES  //
 
   /// @brief Ensure values can only be accessed one-at-a-time.

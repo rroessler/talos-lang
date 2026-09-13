@@ -294,8 +294,8 @@ Talos::Value::Any Talos::Engine::Dispatch::m_feedback(Isolate *isolate, const Fe
 
 template <bool S>
 Talos::Engine::Subtype Talos::Engine::Dispatch::m_matches(const Value::Any &value, const Value::Any &guard) {
-  // check immediately for extension types
-  if (guard.is<Object::Class>()) return guard.as<Object::Class>().extends(value) ? Subtype::SUCCESS : Subtype::FAILURE;
+  // check immediately against normal classes
+  if (guard.is<Object::Class>()) return m_matches(value, guard.as<Object::Class>());
 
   /// TODO: otherwise we can also check against function guards (unsure yet)
   // if (guard.is<Function::Any>()) {}
@@ -306,6 +306,33 @@ Talos::Engine::Subtype Talos::Engine::Dispatch::m_matches(const Value::Any &valu
   // check for enumeration types now
   if (guard.is<Object::Enum>()) return value == guard ? Subtype::SUCCESS : Subtype::FAILURE;
 
-  // otherwise we need to handle with some special cases now
+  // otherwise we need to handle with some special cases now (special since non-class based)
   return guard.is<Value::Void>() && value.is<Value::Void>() ? Subtype::SUCCESS : Subtype::MISMATCH;
+}
+
+Talos::Engine::Subtype Talos::Engine::Dispatch::m_matches(const Value::Any &value, const Object::Class &guard) {
+  // prepare the base shape to be compared against
+  auto base = value.pointer().shape(), extends = guard.shape();
+
+  // if we do not have a derived instance, then do a simple match against shapes
+  if (!value.is<Object::Instance>()) return base == extends ? Subtype::SUCCESS : Subtype::FAILURE;
+
+  // get the base instance to be checked against now
+  auto instance = value.as<Object::Instance>();
+
+  // otherwise we need to go through the prototype chain backwards
+  for (auto prototype = instance.prototype();;) {
+    // check for matches on the current prototype instance
+    if (prototype.shape() == extends) return Subtype::SUCCESS;
+
+    // get the next potential prototype
+    auto parent = prototype.parent();
+
+    // and break or continue if we have a super-type
+    if (!parent.is<Object::Class>()) break;
+    prototype = parent.as<Object::Class>();
+  }
+
+  // otherwise our matching failed
+  return base == extends ? Subtype::SUCCESS : Subtype::FAILURE;
 }

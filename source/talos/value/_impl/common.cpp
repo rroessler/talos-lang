@@ -28,16 +28,14 @@ bool Talos::Value::Any::m_truthiness() const noexcept {
 #undef X
 }
 
-Talos::Shape::Underlying Talos::Value::Any::m_shape() const noexcept {
+Talos::Shape::Underlying Talos::Pointer::Tagged::m_shape() const noexcept {
 #define X(K, T, ...)                                \
   case Pointer::Kind::K: return Shape::Lookup<T>();
-  switch (m_pointer.kind()) { XX_VALUES_LOOKUP(X) default : break; }
+  switch (kind()) { XX_VALUES_LOOKUP(X) default : break; }
 #undef X
 
   // ensure we return constructed instance shapes as well
-  const auto *header = m_as<Object::Any>()->header();
-  if (!header->is<Object::Instance>()) return header->shape();
-  return m_as<Object::Instance>()->prototype().extends();
+  return Object::Any(*this).header()->shape();
 }
 
 $::String::View Talos::Value::Any::m_brand() const noexcept {

@@ -8,6 +8,11 @@ namespace Talos::Builtins {
 
 /// @brief Instance Builtin Traits.
 template <> struct Wrapper<Object::Instance> : public Blueprint<Object::Instance, "Object"> {
+  //  PUBLIC METHODS  //
+
+  /// @brief Gets the baseline object type-class.
+  static $::Shared::Pointer<Type::Prototype> typeclass();
+
 protected:
   //  PRIVATE METHODS  //
 

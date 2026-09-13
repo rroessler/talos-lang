@@ -3,6 +3,7 @@
 
 /// Talos Includes
 #include "talos/forward/server.hpp"
+#include "talos/product/semver.hpp"
 
 namespace Talos::Server {
 
@@ -13,7 +14,7 @@ struct Options : public XLSP::Server::Options {
   /// @brief Ensures underlying options are set properly.
   constexpr Options() {
     server.title = TALOS_MM_TITLE;
-    server.version = TALOS_MM_VERSION;
+    server.version = TALOS_MM_REVISION;
   }
 };
 

@@ -42,7 +42,7 @@ struct Object::Instance : public Object::Mixin<Object::Instance> {
   //  PUBLIC METHODS  //
 
   inline constexpr Fields &fields() const noexcept { return m_wrapper()->fields; }
-  inline constexpr Class &prototype() const noexcept { return m_wrapper()->prototype; }
+  inline constexpr const Class &prototype() const noexcept { return m_wrapper()->prototype; }
   inline constexpr const String::Any &name() const noexcept { return prototype().name(); }
 
 protected:

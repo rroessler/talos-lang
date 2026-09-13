@@ -7,7 +7,7 @@
 - [x] Split `Variable::Captures` into the parsing phase instead of the type-checking phase (this will enable typeless compilation whilst keep performance instead of adding additional visitor overhead)
 - [ ] Running `hyperfine "talos test"` sometimes leads to hangs/runtime blocking. This needs some investigation to see why this occurs (most likely something to do with the scheduler in `talos::xsio`)
     - Changed from using `$::Unique::Pointer` to `$::Shared::Pointer` in `XSIO::Virtual::Thread` for tasks. This does help but now the same race condition occurs more infrequently
-- [ ] Currently there are issues with class inheritance that means we cannot reliably execute `? is ?` clauses. Specifically when we use `Object` as a guard (results in mismatched failures on runtime types)
+- [x] Currently there are issues with class inheritance that means we cannot reliably execute `? is ?` clauses. Specifically when we use `Object` as a guard (results in mismatched failures on runtime types)
 
 ## Rewrite Items
 

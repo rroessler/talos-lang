@@ -12,11 +12,11 @@
 
 Talos::Value::Any Talos::Engine::Invoke::dynamic(Isolate *isolate, const Value::Any &target, const Args &args) {
   // handle the incoming object types available
-  switch (target.shape()) {
+  switch (target.pointer().shape()) {
+  case Shape::Lookup<Object::Class>(): return construct(isolate, target.as<Object::Class>(), args);
   case Shape::Lookup<Function::Native>(): return native(isolate, target.as<Function::Native>(), args);
   case Shape::Lookup<Function::Jitted>(): return jitted(isolate, target.as<Function::Jitted>(), args);
   case Shape::Lookup<Function::Closure>(): return closure(isolate, target.as<Function::Closure>(), args);
-  case Shape::Lookup<Object::Class>(): return construct(isolate, target.as<Object::Class>(), args);
   default: return isolate->panic(6000200, target.brand()); // type is not callable here at all so we fail
   }
 }
@@ -161,16 +161,15 @@ Talos::Value::Any Talos::Engine::Invoke::m_jitted(
   // rebind our incoming variadic arguments if necessary (safe to do since moving into a list)
   if (vargs != UINT64_MAX) args.data()[vargs] = isolate->create<Iterable::List>(args.span(vargs));
 
-  // construct the underlying stack to be used
-  Value::Any stack[Machine::Offset::STK_SIZE] = {
-      Value::Any(0), // prepare baseline value
-      m_initialize(isolate, info->leaked(), context),
-      std::bit_cast<Value::Any>(pass.data()),
-      std::bit_cast<Value::Any>(args.data() - Function::Offset::ARGS_DATA),
-  };
-
-  // construct the frame instance now
+  // construct the underlying stack and frame to be used
+  Value::Any stack[Machine::Offset::STK_SIZE] = {};
   auto frame = Machine::Frame(isolate, info, stack);
+
+  // define all the stack properties now
+  stack[Machine::Offset::STK_OPTR] = Value::Any(0);
+  stack[Machine::Offset::STK_ENVP] = m_initialize(isolate, info->leaked(), context);
+  stack[Machine::Offset::STK_PASS] = std::bit_cast<Value::Any>(pass.data());
+  stack[Machine::Offset::STK_DATA] = std::bit_cast<Value::Any>(args.data() - Function::Offset::ARGS_DATA);
 
   // enforce a checkpoint before running our handler
   $_ASSERT(isolate->frame() == &frame), isolate->thread()->checkpoint();

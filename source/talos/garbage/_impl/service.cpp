@@ -84,7 +84,7 @@ Talos::Object::Any Talos::Garbage::Service::m_decode(Object::Header *header) con
 
   // check for some properties that we are expecting
   $_ASSERT(!object.header()->forwarded(), "Cannot double-forward object headers");
-  $_ASSERT(header->shape() == object.shape(), "Mismatched forwarded object shapes");
+  $_ASSERT(header->shape() == object.header()->shape(), "Mismatched forwarded object shapes");
 
   // return the resulting object now after checks
   return object;

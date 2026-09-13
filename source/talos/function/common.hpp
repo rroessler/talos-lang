@@ -60,7 +60,7 @@ protected:
    */
   template <class R, class F> inline constexpr R m_apply(const R &preset, F callback) const noexcept {
     // handle based on the incoming shape
-    switch (m_as<Object::Any>()->shape()) {
+    switch (m_as<Object::Any>()->header()->shape()) {
     case Shape::Lookup<Native>(): return callback(m_as<Native>());
     case Shape::Lookup<Jitted>(): return callback(m_as<Jitted>());
     case Shape::Lookup<Closure>(): return callback(m_as<Closure>());

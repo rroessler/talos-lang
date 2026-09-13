@@ -220,6 +220,7 @@ private:
    * @param value                 Value to check.
    * @param guard                 Guard to use.
    */
+  static Subtype m_matches(const Value::Any &value, const Object::Class &guard);
   template <bool S> static Subtype m_matches(const Value::Any &value, const Value::Any &guard);
 
   /**

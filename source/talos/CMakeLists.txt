@@ -44,6 +44,7 @@ target_compile_definitions(${TALOS_TARGET_SUPER} PUBLIC
     -DTALOS_MM_VERSION="${TALOS_VERSION_LONG}"
     -DTALOS_MM_COMMIT="${TALOS_VERSION_COMMIT}"
     -DTALOS_MM_CANARY=$<BOOL:${TALOS_OPTION_CANARY}>
+    -DTALOS_MM_SANITIZE=$<BOOL:${TALOS_OPTION_SANITIZE}>
 )
 
 # Define a custom library for binding the crates to the runtime

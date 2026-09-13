@@ -62,29 +62,7 @@ struct Object::Class : public Object::Mixin<Object::Class> {
   inline constexpr Fields &statics() const noexcept { return m_wrapper()->statics; }
   inline constexpr Value::Any &parent() const noexcept { return m_wrapper()->parent; }
   inline constexpr String::Any &name() const noexcept { return m_wrapper()->name; }
-  inline constexpr Shape::Underlying extends() const noexcept { return m_wrapper()->shape; }
-
-  /**
-   * @brief Checks if a value extends this class.
-   * @param value                 Value to check.
-   */
-  inline constexpr bool extends(const Value::Any &value) const noexcept { return extends(value.shape()); }
-  inline constexpr bool extends(Shape::Underlying shape) const noexcept {
-    // get some base details about the instance
-    auto expected = m_wrapper()->shape;
-    auto instance = Shape::Lookup<Instance>();
-
-    // handle fast checks for inheritance
-    if (shape == expected) return true;
-
-    // check if our incoming shape is potentially an instance
-    if (shape > instance && expected == instance) return true;
-
-    // attempt iterating through the parent values to check
-    auto parent = m_wrapper()->parent; // parent
-    if (!parent.is<Object::Class>()) return false;
-    return parent.as<Object::Class>().extends(shape);
-  }
+  inline constexpr Shape::Underlying shape() const noexcept { return m_wrapper()->shape; }
 
 protected:
   //  PRIVATE METHODS  //

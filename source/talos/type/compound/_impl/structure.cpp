@@ -22,8 +22,14 @@ bool Talos::Type::Structure::m_unify(const Erased &candidate, Constraints *const
     if (other.modifiers().test(Variable::Flag::PRIVATE, Variable::Flag::PROTECTED)) return false;
   }
 
-  // should be a success as we got through all the fields
-  return true;
+  // stop early if there is no fallback being used (successfully matched fields)
+  if (m_fallback == nullptr) return true;
+
+  // check basic shape is actually valid firstly (we expect only custom shapes)
+  if (candidate->shape() < Shape::Lookup<Object::Instance>()) return false;
+
+  /// TODO: finally we should be checking against every member value
+  return m_fallback->is<Any>();
 }
 
 void Talos::Type::Structure::m_print(std::ostream &os, const Structure &self) {

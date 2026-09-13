@@ -40,7 +40,7 @@ jobs:
             - name: Testing '${{ matrix.label }}-${{ matrix.arch }}'
               timeout-minutes: 1 # should never go longer than this
               run: |
-                  ${{ github.workspace }}/dist/bin/talos --version
+                  ${{ github.workspace }}/dist/bin/talos --revision
                   ${{ github.workspace }}/dist/bin/talos test
 
             - name: Compress Artifacts

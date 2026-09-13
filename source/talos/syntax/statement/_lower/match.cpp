@@ -1,7 +1,31 @@
 /// Talos Modules
 #include "talos/bytecode/visitor.hpp"
 
+/// Forward Declarations
+$_FWD(Talos::Bytecode::Dispatch, std::vector<Syntax::Query *> split(const std::vector<Syntax::Query *> &))
+
 //  PUBLIC METHODS  //
+
+std::vector<Talos::Syntax::Query *> Talos::Bytecode::Dispatch::split(const std::vector<Syntax::Query *> &queries) {
+  // prepare the resulting split output
+  Syntax::Query *fallback = nullptr;
+  auto result = std::vector<Syntax::Query *>();
+
+  // pre-fill the size required for our queries (at worst)
+  result.reserve(queries.size());
+
+  // attempt binding all our values now
+  for (const auto &query : queries) {
+    if (!query->fallback()) result.emplace_back(query);
+    else if (fallback == nullptr) fallback = query;
+  }
+
+  // post-append the fallback value
+  if (fallback) result.emplace_back(fallback);
+
+  // and return the final result now
+  return result;
+}
 
 TALOS_MM_LOWER_NODE(Fallback, , , ) { /** fallbacks are type-system only */ }
 TALOS_MM_LOWER_NODE(Query, , , ) { /** queries are type-system only */ }
@@ -12,7 +36,7 @@ TALOS_MM_LOWER_NODE(Match, node, compiler, ) {
   auto exit = labels->reserve();
 
   // prepare some labels for each of the queries
-  const auto &queries = node->queries();
+  const auto queries = Bytecode::Dispatch::split(node->queries());
   auto matched = std::vector<Bytecode::Label>(queries.size());
 
   $_PP_SCOPE() {
@@ -35,7 +59,7 @@ TALOS_MM_LOWER_NODE(Match, node, compiler, ) {
     labels->patch(matched[ii]);
 
     // lower the incoming statement now
-    compiler->lower(node->queries()[ii]->statement());
+    compiler->lower(queries[ii]->statement());
 
     // jump to the exit condition now
     compiler->emit<Glyph::JUMP_TO>(exit);

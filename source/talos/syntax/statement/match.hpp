@@ -34,6 +34,11 @@ public:
 
   /// @brief Guards for the query.
   inline constexpr const std::vector<Expression *> &guards() const noexcept { return m_guards; }
+
+  /// @brief Denotes if the query contains a fallback (bypasses all conditions).
+  inline constexpr bool fallback() const noexcept {
+    return std::ranges::any_of(m_guards, [](const Expression *guard) { return guard->is<Fallback>(); });
+  }
 };
 
 /// @brief Match Statement.

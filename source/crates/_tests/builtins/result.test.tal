@@ -10,16 +10,16 @@ import "talos:assert" as Assert;
 // - TEST MOCKS - //
 
 namespace Mock {
-    //! Prepare a consistent value.
+    //! @brief Prepare a consistent value.
     export let value: Any = 42;
 
-    //! Prepare a consistent error.
+    //! @brief Prepare a consistent error.
     export let error: Any = Void;
 
-    //! Prepare a success result value.
+    //! @brief Prepare a success result value.
     export let success = Result.okay(value);
 
-    //! Prepare a failure result value.
+    //! @brief Prepare a failure result value.
     export let failure = Result.error(error);
 };
 

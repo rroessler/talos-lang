@@ -10,19 +10,19 @@ import "talos:assert" as Assert;
 // - TEST MOCKS - //
 
 namespace Mock {
-    //! Prepare an empty value.
+    //! @brief Prepare an empty value.
     export let none = "";
 
-    //! Prepare an ASCII value.
+    //! @brief Prepare an ASCII value.
     export let ascii = "abcdef";
 
-    //! Prepare a Unicode value.
+    //! @brief Prepare a Unicode value.
     export let unicode = "maçã";
 
-    //! Prepare some emoji value.
+    //! @brief Prepare some emoji value.
     export let emoji = "🦄";
 
-    //! Prepare a larger phrase.
+    //! @brief Prepare a larger phrase.
     export let phrase = "Hello, World!";
 };
 

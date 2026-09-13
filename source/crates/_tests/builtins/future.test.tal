@@ -13,13 +13,13 @@ import "talos:_detail" as Detail;
 // - TEST MOCKS - //
 
 namespace Mock {
-    //! Prepare a suitable no-operation function.
+    //! @brief Prepare a suitable no-operation function.
     export let noop = fn => Void;
 
-    //! Function that will always panic.
+    //! @brief Function that will always panic.
     export let panics = fn (message: String) => panic message;
 
-    //! Baseline function to return values.
+    //! @brief Baseline function to return values.
     export let encapsulate = fn (value) => value;
 };
 

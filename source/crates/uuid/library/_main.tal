@@ -36,7 +36,7 @@ export let V7 = m_cast[fn -> String](uuid.V7);
 
 // - NAMESPACES - //
 
-//! Well-known namespace seeds for V3 and V5
+//! @brief Well-known namespace seeds for V3 and V5
 export namespace Seed {
     export let NIL = "00000000-0000-0000-0000-000000000000";
     export let DNS = "6ba7b810-9dad-11d1-80b4-00c04fd430c8";

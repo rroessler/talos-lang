@@ -20,8 +20,6 @@ Talos::Type::Control Talos::Type::Dispatch::query(Analyzer *analyzer, const Synt
 
     /// TODO: use the result of the guard against the match value
 
-    // branching guards should be handled specially for matching
-
     // ignore handling further if we do not have a fallback guard
     if (!guard->is<Syntax::Fallback>()) continue;
 

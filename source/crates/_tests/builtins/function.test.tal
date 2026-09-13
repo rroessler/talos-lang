@@ -10,26 +10,26 @@ import "talos:assert" as Assert;
 // - TEST MOCKS - //
 
 namespace Mock {
-    //! This function forces an immediate panic.
+    //! @brief This function forces an immediate panic.
     export let panics = fn => panic;
 
-    //! This function adds together two numbers.
+    //! @brief This function adds together two numbers.
     export let addition = fn (a: Number, b: Number): Number => a + b;
 
-    //! This function subtracts two numbers.
+    //! @brief This function subtracts two numbers.
     export let subtraction = fn (a: Number, b: Number): Number {
         return a - b;
     };
 
-    //! This function encloses a given value.
+    //! @brief This function encloses a given value.
     export let encapsulate = fn (value: Any): fn -> Any {
         return fn => value;
     };
 
-    //! Tests for optional parameters.
+    //! @brief Tests for optional parameters.
     export let optional = fn (value: Number = 42): Number => value;
 
-    //! Tests for variadic parameters.
+    //! @brief Tests for variadic parameters.
     export let variadic: Function = fn (...vargs): Any => vargs;
 };
 

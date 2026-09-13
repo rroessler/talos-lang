@@ -10,10 +10,10 @@ import "talos:assert" as Assert;
 // - TEST MOCKS - //
 
 namespace Mock {
-    //! Prepare an empty list.
+    //! @brief Prepare an empty list.
     export let none = List.empty();
 
-    //! Prepare a ranged list.
+    //! @brief Prepare a ranged list.
     export let some = List.range(42);
 };
 

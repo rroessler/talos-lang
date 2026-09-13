@@ -10,13 +10,13 @@ import "talos:assert" as Assert;
 // - TEST MOCKS - //
 
 namespace Mock {
-    //! Prepare the defaulted exception value.
+    //! @brief Prepare the defaulted exception value.
     export let default = Exception.from();
 
-    //! Prepare an exception with a custom message.
+    //! @brief Prepare an exception with a custom message.
     export let custom = Exception.from("...");
 
-    //! Prepare an exception with a custom name.
+    //! @brief Prepare an exception with a custom name.
     export let named = Exception.named("Custom");
 };
 

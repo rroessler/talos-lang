@@ -92,6 +92,8 @@ Todo...
 - Added: Included the builtin typeclass for `Object` values. This was previously omitted but will be necessary in future versions for `Object` reflection methods.
 - Moved: The internal `Globals::Service` is now instantiated immediately. This was done to ensure these types/values are always available on startup before loggable services.
 - Moved: The `.shape()` method for the internal `Value::Any` wrapper has been moved to the base `Pointer::Tagged` value. This simplifies abstractions using these shapes as they are expected to always be builtin shapes only.
+- Fixed: When inside a `match` query, the `return` statement always expected a value. Now the choice to have no value (similar to the `panic` statement) is allowed.
+- Fixed: The default query `*` for `match` statements if declared before other clauses would immediately match values. This has now been changed to always be the last check.
 
 <h4>Toolkit / talos serve</h4>
 

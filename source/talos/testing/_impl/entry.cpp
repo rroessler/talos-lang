@@ -62,7 +62,7 @@ $_NORETURN void Talos::Testing::Entry::m_execute() {
 
 bool Talos::Testing::Entry::m_analyze(const $::URI::Buffer &resource, Diagnostic::Reporter *reporter) {
   if (options()->flags.typeless) return true; // required to ignore typings
-  return !service<Import::Service>()->analyze(resource, reporter, false).hints;
+  return !service<Import::Service>()->analyze(resource, reporter, false).errors;
 }
 
 void Talos::Testing::Entry::m_empty() {

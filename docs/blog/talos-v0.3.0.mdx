@@ -1,6 +1,5 @@
 ---
-draft: true
-date: 1970-01-01
+date: 2026-09-14
 author: Reuben Roessler
 title: Talos v0.3.0
 ---
@@ -33,17 +32,9 @@ In terms of performance, although `List.range` will incur a minor performance co
 
 Whilst adding further testing for the `List` builtin, a reasonable upheaval of its methods was done. More specifically for breaking changes, the `List.erase` overloads were split into three distinct methods.
 
-### `List.clear`
-
-Todo...
-
-### `List.drop`
-
-Todo...
-
-### `List.erase`
-
-Todo...
+- `List.clear` &nbsp;&mdash;&nbsp; Removes all elements from a `List` collection.
+- `List.drop` &nbsp;&mdash;&nbsp; Removes an element by index from a `List` collection.
+- `List.erase` &nbsp;&mdash;&nbsp; Removes elements from a `List` indicated by a given range.
 
 ## Numeric Constants
 
@@ -56,11 +47,22 @@ Whilst updating the testing cases for builtin `Number` values, the following con
 
 This release came with a major upgrade to the baseline testing for Talos syntax and builtins. By dogfooding these tests directly in Talos (using the `talos:assert` and `talos:test` internal crates), we ensure the hardening of the language. It allows us to catch edge cases when desiging language support, validate the type-system ahead of releases and track regressions by standardizing the expected functionality for Talos. Additionally, it allows us to play with the developer experience of Talos to make the language better for developers.
 
-Todo (write about tests added)...
+The following tests have now been implemented:
+
+- `List` &nbsp;&mdash;&nbsp; Builtin methods and statics.
+- `Number` &nbsp;&mdash;&nbsp; Builtin methods and statics.
+- `Result` &nbsp;&mdash;&nbsp; Builtin statics only.
+- `String` &nbsp;&mdash;&nbsp; Builtin methods and statics.
+- `@...` &nbsp;&mdash;&nbsp; Simple decorator transform.
+- `use` &nbsp;&mdash;&nbsp; Basic resource disposal.
+- `class` &nbsp;&mdash;&nbsp; Basic construction tests.
+- `match` &nbsp;&mdash;&nbsp; Basic pattern matching.
+
+Although this is substantial, further tests will be added over time to ensure correctness of both the type-system and runtime. The current testing suites can be [found inside the source-code](https://github.com/rroessler/talos-lang/tree/main/source/crates/_tests) with internal crate definitions.
 
 ## Upcoming Work
 
-Todo...
+With this release comes improvements and further checks for correctness, however more testing is still needed to ensure all edge-cases are handled. The next release will also begin looking at tidying up various `Todo()` sections across the project, as well as begin scoping out work for the internal crates for Talos.
 
 ---
 

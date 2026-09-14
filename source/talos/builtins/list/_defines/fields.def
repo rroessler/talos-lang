@@ -60,7 +60,7 @@ TALOS_XX_FIELDS_FOOTER()
 TALOS_XX_FIELDS_HEADER()
 TALOS_XX_FIELDS_DEFINE(drop)
 TALOS_XX_FIELDS_TYPEDEF("fn (index: Number) -> T")
-TALOS_XX_FIELDS_DESCRIBE("Removes an element by index from a `List`.")
+TALOS_XX_FIELDS_DESCRIBE("Removes an element by index from a `List` collection.")
 TALOS_XX_FIELDS_FOOTER()
 
 TALOS_XX_FIELDS_HEADER()
